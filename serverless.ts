@@ -6,12 +6,39 @@ const serverlessConfiguration: AWS = {
   service: 'todo-list-api-ts',
   frameworkVersion: '2',
   custom: {
-    webpack: {
-      webpackConfig: './webpack.config.js',
-      includeModules: true,
+    region: '${opt:region, self:provider.region}',
+    stage: '${opt:stage, self:provider.stage}',
+    list_table: '${self:service}-list-table-${opt:stage, self:provider.stage}',
+    task_table: '${self:service}-task-table-${opt:stage, self:provider.stage}',
+    table_throughputs: {
+      prod: 5,
+      default: 1,
     },
+    table_throughput: '${self:custom.TABLE_THROUGHPUTS.${self:custom.stage}, self:custom.table_throughputs.default}',
+    dynamodb: {
+      stages: ['dev'],
+      start: {
+        port: 8008,
+        inMemory: true,
+        heapInitial: '200m',
+        heapMax: '1g',
+        migrate: true,
+        seed: true,
+        convertEmptyValues: true,
+      }
+    },
+    ['serverless-offline']: {
+      httpPort: 3000,
+      babelOptions: {
+        presets: ["env"]
+      }
+    }
   },
-  plugins: ['serverless-webpack'],
+  plugins: [
+    'serverless-bundle',
+    'serverless-offline',
+    'serverless-dotenv-plugin',
+  ],
   provider: {
     name: 'aws',
     runtime: 'nodejs14.x',
@@ -21,10 +48,13 @@ const serverlessConfiguration: AWS = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+      REGION: '${self:custom.region}',
+      STAGE: '${self:custom.stage}',
+      LIST_TABLE: '${self:custom.list_table}',
+      TASK_TABLE: '${self:custom.task_table}',
     },
     lambdaHashingVersion: '20201221',
   },
-  // import the function via paths
   functions: { hello },
   package: {
     individually: true,
