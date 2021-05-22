@@ -1,4 +1,11 @@
+/**
+ * Types
+ */
 type ResponseHeader = { [header: string]: string | number | boolean; };
+
+/**
+ * Interfaces
+ */
 interface ResponseBody {
   data: any;
   message: string;
@@ -10,6 +17,9 @@ interface Response {
   body: string;
 };
 
+/**
+ * Enums
+ */
 enum Status {
   SUCCESS = 'success',
   ERROR = 'error',
