@@ -54,6 +54,24 @@ const serverlessConfiguration: AWS = {
       TASK_TABLE: '${self:custom.task_table}',
     },
     lambdaHashingVersion: '20201221',
+    iamRoleStatements: [
+      {
+        Effect: 'Allow',
+        Action: [
+            'dynamodb:DescribeTable',
+            'dynamodb:Query',
+            'dynamodb:Scan',
+            'dynamodb:GetItem',
+            'dynamodb:PutItem',
+            'dynamodb:UpdateItem',
+            'dynamodb:DeleteItem'
+        ],
+        Resource: [
+          {"Fn::GetAtt": [ 'ListTable', 'Arn' ]},
+          {"Fn::GetAtt": [ 'TaskTable', 'Arn' ]}
+        ]
+      }
+    ]
   },
   functions: { hello },
   package: {
