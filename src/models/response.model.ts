@@ -1,3 +1,5 @@
+import { RESPONSE_MESSAGE } from '../enums/response-message.enum';
+
 /**
  * Types
  */
@@ -15,21 +17,6 @@ interface Response {
   statusCode: number;
   headers: ResponseHeader;
   body: string;
-};
-
-/**
- * Enums
- */
-enum Status {
-  SUCCESS = 'success',
-  ERROR = 'error',
-  BAD_REQUEST = 'bad request',
-};
-
-const STATUS_MESSAGES = {
-  200: Status.SUCCESS,
-  400: Status.BAD_REQUEST,
-  500: Status.ERROR,
 };
 
 const RESPONSE_HEADERS: ResponseHeader = {
@@ -55,7 +42,7 @@ export default class ResponseModel {
     this.body = {
       data: data,
       message: message,
-      status: STATUS_MESSAGES[statusCode],
+      status: RESPONSE_MESSAGE[statusCode],
     };
     this.statusCode = statusCode;
   };
