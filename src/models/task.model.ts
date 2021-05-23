@@ -8,16 +8,15 @@ interface Props {
   listId: string;
   description: string;
   completed: boolean;
-}
+};
 interface TaskInterface extends Props {
   timestamp: number;
-}
+};
 
 /**
  * class TaskModel
  */
 export default class TaskModel {
-
   private id: string;
   private listId: string;
   private description: string;
