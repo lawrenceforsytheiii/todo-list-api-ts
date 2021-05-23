@@ -15,7 +15,8 @@
     "@types/uuid": "^8.3.0",
     "aws-sdk": "^2.912.0",
     "source-map-support": "^0.5.19",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "validate.js": "^0.13.1"
   },
   "devDependencies": {
     "@serverless/typescript": "^2.23.0",
