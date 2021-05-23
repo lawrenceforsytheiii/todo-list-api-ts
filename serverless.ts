@@ -36,6 +36,7 @@ const serverlessConfiguration: AWS = {
   },
   plugins: [
     'serverless-bundle',
+    'serverless-dynamodb-local',
     'serverless-offline',
     'serverless-dotenv-plugin',
   ],
