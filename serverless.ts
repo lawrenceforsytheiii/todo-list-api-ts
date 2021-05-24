@@ -1,6 +1,6 @@
 import type { AWS } from '@serverless/typescript';
-import hello from '@functions/hello';
 import dynamodbTables from './resources/dynamodb';
+import functions from './resources/functions';
 
 const serverlessConfiguration: AWS = {
   service: 'todo-list-api-ts',
@@ -74,7 +74,7 @@ const serverlessConfiguration: AWS = {
       }
     ]
   },
-  functions: { hello },
+  functions: functions,
   package: {
     individually: true,
   },
