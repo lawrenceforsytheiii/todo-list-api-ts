@@ -38,7 +38,7 @@ export default class ResponseModel {
       status: STATUS_MESSAGES[statusCode],
     };
     this.statusCode = statusCode;
-  };
+  }
 
   /**
    * Add or update a body variable
@@ -47,7 +47,7 @@ export default class ResponseModel {
    */
   setBodyVariable = (variable: string, value: string): void => {
     this.body[variable] = value;
-  };
+  }
 
   /**
    * Set data
@@ -55,7 +55,7 @@ export default class ResponseModel {
    */
   setBodyData = (data: any): void => {
     this.body.data = data;
-  };
+  }
 
   /**
    * Set status code
@@ -63,7 +63,7 @@ export default class ResponseModel {
    */
   setStatusCode = (statusCode: number): void => {
     this.statusCode = statusCode;
-  };
+  }
 
   /**
    * Get status code
@@ -71,7 +71,7 @@ export default class ResponseModel {
    */
   getStatusCode = (): number => {
     return this.statusCode;
-  };
+  }
 
   /**
    * Set body message
@@ -79,7 +79,7 @@ export default class ResponseModel {
    */
   setBodyMessage = (message: string): void => {
     this.body.message = message;
-  };
+  }
 
   /**
    * Get body message
@@ -87,7 +87,7 @@ export default class ResponseModel {
    */
   getBodyMessage = (): any => {
     return this.body.message;
-  };
+  }
 
   /**
    * Geneate a response
@@ -99,5 +99,5 @@ export default class ResponseModel {
       headers: RESPONSE_HEADERS,
       body: JSON.stringify(this.body),
     };
-  };
+  }
 };
