@@ -6,11 +6,11 @@ import { v4 as UUID } from 'uuid';
 interface Props {
   id?: string;
   name: string;
-};
+}
 
 interface ListInterface extends Props {
   timestamp: number;
-};
+}
 
 /**
  * class ListModel
@@ -67,4 +67,4 @@ export default class ListModel {
       timestamp: new Date().getTime(),
     };
   }
-};
+}

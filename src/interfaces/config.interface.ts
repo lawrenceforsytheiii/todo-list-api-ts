@@ -3,4 +3,4 @@ export default interface Config {
   accessKeyId?: string;
   secretAccessKey?: string;
   endpoint?: string;
-};
+}

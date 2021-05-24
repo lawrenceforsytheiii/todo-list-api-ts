@@ -100,4 +100,4 @@ export default class ResponseModel {
       body: JSON.stringify(this.body),
     };
   }
-};
+}
