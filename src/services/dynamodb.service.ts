@@ -36,7 +36,7 @@ type DeleteItemOutput = AWS.DynamoDB.DocumentClient.DeleteItemOutput;
 
 type Item = {[index: string]: string};
 
-AWS.config.update({ region: "eu-west-1" });
+AWS.config.update({ region: "us-east-1" });
 
 const documentClient = new AWS.DynamoDB.DocumentClient();
 
