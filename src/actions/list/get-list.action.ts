@@ -30,7 +30,7 @@ export const getList: APIGatewayProxyHandler = (event: APIGatewayEvent, _context
   return validateAgainstConstraints(requestData, requestConstraints)
     .then(() => {
       // Get item from the DynamoDB table
-      return dynamoDBService.get({ Key: listId, TableName: LIST_TABLE });
+      return dynamoDBService.getItem({ key: listId, tableName: LIST_TABLE });
     })
     .then( async (data) => {
       // Initialise DynamoDB QUERY parameters
