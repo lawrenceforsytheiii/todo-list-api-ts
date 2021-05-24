@@ -82,5 +82,17 @@ export default {
         }
       }
     ]
+  },
+  getTask: {
+    handler: 'handler.getTask',
+    events: [
+      {
+        http: {
+          method: 'POST',
+          path: 'task',
+          cors: true
+        }
+      }
+    ]
   }
 };
