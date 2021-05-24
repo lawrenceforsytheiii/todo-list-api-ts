@@ -29,7 +29,7 @@ export const updateList: APIGatewayProxyHandler = (event: APIGatewayEvent, _cont
   // Validate against constraints
   return Promise.all([
     validateAgainstConstraints(requestData, requestConstraints),
-    dynamoDBService.getItem({key: listId, tableName: LIST_TABLE})
+    dynamoDBService.get({Key: listId, TableName: LIST_TABLE})
   ])
     .then(() => {
       // Initialise DynamoDB UPDATE parameters
