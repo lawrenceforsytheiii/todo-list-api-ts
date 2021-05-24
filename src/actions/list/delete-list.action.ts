@@ -30,7 +30,7 @@ export const deleteList: APIGatewayProxyHandler = (event: APIGatewayEvent, _cont
   return validateAgainstConstraints(requestData, requestConstraints)
     .then(() => {
       // Get item from the DynamoDB table
-      return dynamoDBService.get({ Key: listId, TableName: LIST_TABLE });
+      return dynamoDBService.getItem({ key: listId, tableName: LIST_TABLE });
     })
     .then(() => {
       // Initialise DynamoDB DELETE parameters
