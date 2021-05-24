@@ -8,10 +8,10 @@ interface Props {
   listId: string;
   description: string;
   completed: boolean;
-};
+}
 interface TaskInterface extends Props {
   timestamp: number;
-};
+}
 
 /**
  * class TaskModel
@@ -27,7 +27,7 @@ export default class TaskModel {
     this.listId = listId;
     this.description = description;
     this.completed = completed;
-  };
+  }
 
   /**
    * Set id
@@ -35,7 +35,7 @@ export default class TaskModel {
    */
   setId(value: string) {
     this.id = value !== '' ? value : null;
-  };
+  }
 
   /**
    * Get Id
@@ -43,7 +43,7 @@ export default class TaskModel {
    */
   getId() {
     return this.id;
-  };
+  }
 
   /**
    * Set list id
@@ -51,7 +51,7 @@ export default class TaskModel {
    */
   setListId(value: string) {
     this.listId = value !== '' ? value : null;
-  };
+  }
 
   /**
    * Get list id
@@ -59,7 +59,7 @@ export default class TaskModel {
    */
   getListId() {
     return this.listId;
-  };
+  }
   
   /**
    * Set description
@@ -67,7 +67,7 @@ export default class TaskModel {
    */
   setDescription(value: string) {
     this.description = value ? value : null;
-  };
+  }
 
   /**
    * Get description
@@ -75,7 +75,7 @@ export default class TaskModel {
    */
   getDescription() {
     return this.description;
-  };
+  }
 
   /**
    * Set completed
@@ -83,7 +83,7 @@ export default class TaskModel {
    */
   setCompleted(value: boolean) {
     this.completed = value ? value : null;
-  };
+  }
 
   /**
    * Get completed
@@ -91,7 +91,7 @@ export default class TaskModel {
    */
   getCompleted() {
     return this.completed;
-  };
+  }
 
   /**
    * Get base entity mappings
@@ -105,5 +105,5 @@ export default class TaskModel {
       completed: this.getCompleted(),
       timestamp: new Date().getTime(),
     };
-  };
-};
+  }
+}

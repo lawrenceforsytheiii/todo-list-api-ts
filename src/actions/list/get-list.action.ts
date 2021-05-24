@@ -1,16 +1,15 @@
 import {
   APIGatewayProxyHandler,
   APIGatewayEvent,
-  Context,
   APIGatewayProxyResult
 } from 'aws-lambda';
 import 'source-map-support/register';
 import ResponseModel from "../../models/response.model";
 import DynamoDBService from "../../services/dynamodb.service";
 import { validateAgainstConstraints } from "../../utils/util";
-import requestConstraints from '../../constraints/list/id.constraint.json';
+import requestConstraints from '../../constraints/list/get.constraint.json';
 
-export const getList: APIGatewayProxyHandler = (event: APIGatewayEvent, _context: Context): Promise<APIGatewayProxyResult> => {
+export const getList: APIGatewayProxyHandler = (event: APIGatewayEvent): Promise<APIGatewayProxyResult> => {
   // Initialize response variable
   let response;
 

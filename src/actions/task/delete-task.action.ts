@@ -1,7 +1,6 @@
 import {
   APIGatewayProxyHandler,
   APIGatewayEvent,
-  Context,
   APIGatewayProxyResult
 } from 'aws-lambda';
 import 'source-map-support/register';
@@ -10,7 +9,7 @@ import DynamoDBService from "../../services/dynamodb.service";
 import { validateAgainstConstraints } from "../../utils/util";
 import requestConstraints from '../../constraints/task/delete.constraint.json';
 
-export const deleteTask: APIGatewayProxyHandler = async (event: APIGatewayEvent, _context: Context): Promise<APIGatewayProxyResult> => {
+export const deleteTask: APIGatewayProxyHandler = async (event: APIGatewayEvent): Promise<APIGatewayProxyResult> => {
   // Initialize response variable
   let response;
 

@@ -127,4 +127,4 @@ export default class DynamoDBService {
       throw new ResponseModel({}, 500, `delete-error: ${error}`);
     }
   };
-};
+}

@@ -12,7 +12,7 @@ type Generic<T> = {
  * @param constraints
  * @return {Promise<any>}
  */
-export const validateAgainstConstraints = (values: Generic<string>, constraints: Generic<object>) => {
+export const validateAgainstConstraints = (values: Generic<string>, constraints: Generic<Record<string, unknown>>) => {
   return new Promise<void>((resolve, reject) => {
     const validation = validate(values, constraints);
 

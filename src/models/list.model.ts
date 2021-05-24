@@ -6,11 +6,11 @@ import { v4 as UUID } from 'uuid';
 interface Props {
   id?: string;
   name: string;
-};
+}
 
 interface ListInterface extends Props {
   timestamp: number;
-};
+}
 
 /**
  * class ListModel
@@ -22,7 +22,7 @@ export default class ListModel {
   constructor({ id = UUID(), name = '' }: Props) {
     this.id = id;
     this.name = name;
-  };
+  }
 
   /**
    * Set id
@@ -30,7 +30,7 @@ export default class ListModel {
    */
   setId(value: string) {
     this.id = value !== '' ? value : null;
-  };
+  }
 
   /**
    * Get id
@@ -38,7 +38,7 @@ export default class ListModel {
    */
   getId() {
     return this.id;
-  };
+  }
 
   /**
    * Set name
@@ -46,7 +46,7 @@ export default class ListModel {
    */
   setName(value: string) {
     this.name = value !== '' ? value : null;
-  };
+  }
 
   /**
    * Get name
@@ -54,7 +54,7 @@ export default class ListModel {
    */
   getName() {
     return this.name;
-  };
+  }
 
   /**
    * Get base entity mappings
@@ -66,5 +66,5 @@ export default class ListModel {
       name: this.getName(),
       timestamp: new Date().getTime(),
     };
-  };
-};
+  }
+}
