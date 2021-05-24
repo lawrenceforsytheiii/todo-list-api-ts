@@ -14,7 +14,7 @@ const serverlessConfiguration: AWS = {
       prod: 5,
       default: 1,
     },
-    table_throughput: '${self:custom.TABLE_THROUGHPUTS.${self:custom.stage}, self:custom.table_throughputs.default}',
+    TABLE_THROUGHPUT: '${self:custom.TABLE_THROUGHPUTS.${self:custom.stage}, self:custom.table_throughputs.default}',
     dynamodb: {
       stages: ['dev'],
       start: {
