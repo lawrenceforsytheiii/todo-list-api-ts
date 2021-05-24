@@ -8,7 +8,7 @@ import Config from '../interfaces/config.interface';
 
 // Enums
 import { StatusCode } from "../enums/status-code.enum";
-import { RESPONSE_MESSAGE } from "../enums/response-message.enum";
+import { ResponseMessage } from "../enums/response-message.enum";
 
 // Put
 type PutItem = AWS.DynamoDB.DocumentClient.PutItemInput;
@@ -36,7 +36,21 @@ type DeleteItemOutput = AWS.DynamoDB.DocumentClient.DeleteItemOutput;
 
 type Item = {[index: string]: string};
 
-AWS.config.update({ region: "us-east-1" });
+const {
+  STAGE,
+  DYNAMODB_LOCAL_STAGE,
+  DYNAMODB_LOCAL_ACCESS_KEY_ID,
+  DYNAMODB_LOCAL_SECRET_ACCESS_KEY,
+  DYNAMODB_LOCAL_ENDPOINT
+} = process.env;
+
+const config: Config = { region: "us-east-1" };
+if (STAGE === DYNAMODB_LOCAL_STAGE) {
+    config.accessKeyId = DYNAMODB_LOCAL_ACCESS_KEY_ID;
+    config.secretAccessKey = DYNAMODB_LOCAL_SECRET_ACCESS_KEY;
+    config.endpoint = DYNAMODB_LOCAL_ENDPOINT;
+}
+AWS.config.update(config);
 
 const documentClient = new AWS.DynamoDB.DocumentClient();
 
@@ -46,6 +60,7 @@ export default class DynamoDBService {
     try {
       return await documentClient.put(params).promise();
     } catch (error) {
+      console.error(`create-error: ${error}`);
       throw new ResponseModel({}, 500, `create-error: ${error}`);
     }
   };
@@ -54,6 +69,7 @@ export default class DynamoDBService {
     try {
       return await documentClient.batchWrite(params).promise();
     } catch (error) {
+      console.error(`batch-write-error: ${error}`);
       throw new ResponseModel({}, 500, `batch-write-error: ${error}`);
     }
   };
@@ -62,6 +78,7 @@ export default class DynamoDBService {
     try {
       return await documentClient.update(params).promise();
     } catch (error) {
+      console.error(`update-error: ${error}`);
       throw new ResponseModel({}, 500, `update-error: ${error}`);
     }
   };
@@ -70,6 +87,7 @@ export default class DynamoDBService {
     try {
       return await documentClient.query(params).promise();
     } catch (error) {
+      console.error(`query-error: ${error}`);
       throw new ResponseModel({}, 500, `query-error: ${error}`);
     }
   };
@@ -78,14 +96,34 @@ export default class DynamoDBService {
     try {
       return await documentClient.get(params).promise();
     } catch (error) {
+      console.error(`get-error: ${error}`);
       throw new ResponseModel({}, 500, `get-error: ${error}`);
     }
+  };
+
+  getItem = async ({ key, hash, hashValue, tableName}: Item) => {
+    const params = {
+        TableName: tableName,
+        Key: {
+            id: key,
+        },
+    }
+    if (hash) {
+        params.Key[hash] = hashValue;
+    }
+    const results = await this.get(params);
+    if (Object.keys(results).length) {
+        return results;
+    }
+    console.error('Item does not exist');
+    throw new ResponseModel({ id: key }, StatusCode.BAD_REQUEST, ResponseMessage.INVALID_REQUEST)
   };
 
   delete = async (params: DeleteItem): Promise<DeleteItemOutput> => {
     try {
       return await documentClient.delete(params).promise();
     } catch (error) {
+      console.error(`delete-error: ${error}`);
       throw new ResponseModel({}, 500, `delete-error: ${error}`);
     }
   };
