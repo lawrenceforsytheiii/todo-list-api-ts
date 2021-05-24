@@ -30,7 +30,7 @@ export const updateTask: APIGatewayProxyHandler = (event: APIGatewayEvent, _cont
     // Validate against constraints
     validateAgainstConstraints(requestData, requestConstraints),
     // Get item from the DynamoDB table
-    dynamoDBService.get({ Key: listId, TableName: LIST_TABLE })
+    dynamoDBService.getItem({ key: listId, tableName: LIST_TABLE })
   ])
     .then(() => {
       // Optional completed parameter
