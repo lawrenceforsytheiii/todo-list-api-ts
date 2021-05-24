@@ -1,6 +1,6 @@
 import type { AWS } from '@serverless/typescript';
-import hello from '@functions/hello';
 import dynamodbTables from './resources/dynamodb';
+import functions from './resources/functions';
 
 const serverlessConfiguration: AWS = {
   service: 'todo-list-api-ts',
@@ -14,7 +14,7 @@ const serverlessConfiguration: AWS = {
       prod: 5,
       default: 1,
     },
-    table_throughput: '${self:custom.TABLE_THROUGHPUTS.${self:custom.stage}, self:custom.table_throughputs.default}',
+    TABLE_THROUGHPUT: '${self:custom.TABLE_THROUGHPUTS.${self:custom.stage}, self:custom.table_throughputs.default}',
     dynamodb: {
       stages: ['dev'],
       start: {
@@ -36,6 +36,7 @@ const serverlessConfiguration: AWS = {
   },
   plugins: [
     'serverless-bundle',
+    'serverless-dynamodb-local',
     'serverless-offline',
     'serverless-dotenv-plugin',
   ],
@@ -73,7 +74,7 @@ const serverlessConfiguration: AWS = {
       }
     ]
   },
-  functions: { hello },
+  functions: functions,
   package: {
     individually: true,
   },
