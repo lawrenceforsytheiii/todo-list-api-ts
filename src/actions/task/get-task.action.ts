@@ -31,12 +31,11 @@ export const getTask: APIGatewayProxyHandler = async (event: APIGatewayEvent, _c
     .then(() => {
       // Get item from the DynamoDB table
       // if it exists
-      return dynamoDBService.get({
-        Key: {
-          "id": taskId,
-          "listId": listId
-        },
-        TableName: TASKS_TABLE
+      return dynamoDBService.getItem({
+        key: taskId,
+        hash: 'listId',
+        hashValue: listId,
+        tableName: TASKS_TABLE
       });
     })
     .then((data) => {
