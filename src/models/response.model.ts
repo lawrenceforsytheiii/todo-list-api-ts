@@ -1,28 +1,21 @@
-import { RESPONSE_MESSAGE } from '../enums/response-message.enum';
-
-/**
- * Types
- */
-type ResponseHeader = { [header: string]: string | number | boolean; };
-
-/**
- * Interfaces
- */
-interface ResponseBody {
-  data: any;
-  message: string;
-  status?: string;
-};
-interface Response {
-  statusCode: number;
-  headers: ResponseHeader;
-  body: string;
-};
+import {
+  ResponseBody,
+  Response,
+  ResponseHeader,
+} from '../interfaces/response.interface';
+import { Status } from '../enums/status.enum';
+import { StatusCode } from '../enums/status-code.enum';
 
 const RESPONSE_HEADERS: ResponseHeader = {
   'Content-Type': 'application/json',
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Credentials': true,
+};
+
+export const STATUS_MESSAGES = {
+  [StatusCode.OK]: Status.SUCCESS,
+  [StatusCode.BAD_REQUEST]: Status.BAD_REQUEST,
+  [StatusCode.ERROR]: Status.ERROR,
 };
 
 /**
@@ -38,11 +31,11 @@ export default class ResponseModel {
    * @param statusCode
    * @param message
    */
-  constructor(data = {}, statusCode = 402, message = '') {
+  constructor(data = {}, statusCode = StatusCode.BAD_REQUEST, message = '') {
     this.body = {
       data: data,
       message: message,
-      status: RESPONSE_MESSAGE[statusCode],
+      status: STATUS_MESSAGES[statusCode],
     };
     this.statusCode = statusCode;
   };
