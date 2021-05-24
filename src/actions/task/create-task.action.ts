@@ -26,7 +26,7 @@ export const createTask: APIGatewayProxyHandler = async (event: APIGatewayEvent,
       // Validate against constraints
       validateAgainstConstraints(requestData, requestConstraints),
       // Get item from the DynamoDB table
-      dynamoDBService.get({ Key: requestData.listId, TableName: process.env.LIST_TABLE })
+      dynamoDBService.getItem({ key: requestData.listId, tableName: process.env.LIST_TABLE })
     ])
     .then(async () => {
       // Initialise and hydrate model
