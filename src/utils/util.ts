@@ -23,3 +23,12 @@ export const validateAgainstConstraints = (values: Generic<string>, constraints:
     }
   });
 };
+
+export const createChunks = (data: any[], chunkSize: number) => {
+  const urlChunks = [];
+  let batchIterator = 0;
+  while (batchIterator < data.length) {
+    urlChunks.push(data.slice(batchIterator, (batchIterator += chunkSize)));
+  }
+  return urlChunks;
+};
