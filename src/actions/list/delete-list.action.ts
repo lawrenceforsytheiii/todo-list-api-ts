@@ -8,7 +8,7 @@ import 'source-map-support/register';
 import ResponseModel from "../../models/response.model";
 import DynamoDBService from "../../services/dynamodb.service";
 import { validateAgainstConstraints, createChunks } from "../../utils/util";
-import requestConstraints from '../../constraints/list/id.constraint.json';
+import requestConstraints from '../../constraints/list/delete.constraint.json';
 
 export const deleteList: APIGatewayProxyHandler = (event: APIGatewayEvent, _context: Context): Promise<APIGatewayProxyResult> => {
   // Initialize response variable
