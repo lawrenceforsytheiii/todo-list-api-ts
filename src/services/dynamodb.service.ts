@@ -103,17 +103,17 @@ export default class DynamoDBService {
 
   getItem = async ({ key, hash, hashValue, tableName}: Item) => {
     const params = {
-        TableName: tableName,
-        Key: {
-            id: key,
-        },
+      TableName: tableName,
+      Key: {
+        id: key,
+      },
     }
     if (hash) {
-        params.Key[hash] = hashValue;
+      params.Key[hash] = hashValue;
     }
     const results = await this.get(params);
     if (Object.keys(results).length) {
-        return results;
+      return results;
     }
     console.error('Item does not exist');
     throw new ResponseModel({ id: key }, StatusCode.BAD_REQUEST, ResponseMessage.INVALID_REQUEST)
